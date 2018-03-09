@@ -1,6 +1,6 @@
 bibentry("Manual",
    title = "songwriteR: An R package for interfacing with APIs relating to songs and music",
-   author = c(person("Andy Rominger")),
+   author = c(person("Andrew J. Rominger")),
    organization = "",
    address      = "",
    year   = "2018",
