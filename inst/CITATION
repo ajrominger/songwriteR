@@ -1,0 +1,11 @@
+bibentry("Manual",
+   title = "songwriteR: An R package for interfacing with APIs relating to songs and music",
+   author = c(person("Andy Rominger")),
+   organization = "",
+   address      = "",
+   year   = "2018",
+   note   = "R package version 0.0",
+   url    = "github.com/ajrominger/songwriteR",
+
+   mheader = "To cite songwriteR in publications use:"
+)

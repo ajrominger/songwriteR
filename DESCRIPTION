@@ -1,0 +1,22 @@
+Package: songwriteR
+Type: Package
+Title: An R package for interfacing with APIs relating to songs and music
+Version: 0.0
+Date: 2018-03-09
+Author: Andy Rominger
+Maintainer: Andy Rominger <ajrominger@gmail.com>
+Description: Interact with APIs from Spotify, Pandora, YouTube and Genius
+License: GPL-2
+URL: https://github.com/ajrominger/songwriteR
+BugReports: https://github.com/ajrominger/songwriteR/issues
+VignetteBuilder: knitr
+LazyLoad: yes
+LazyData: true
+Depends:
+    R (>= 2.10)
+Imports:
+    httr
+Suggests:
+    testthat,
+    knitr
+RoxygenNote: 5.0.1
