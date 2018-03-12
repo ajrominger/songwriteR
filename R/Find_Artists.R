@@ -1,13 +1,17 @@
 #' @title Search for and get artists
 #'
-#' @description These functions search for artist(s) by name (\code{artistSearch}) and unique ID (\code{artistGet}).
+#' @description These functions search for artist(s) by name (\code{artistSearch}) and unique 
+#' ID (\code{artistGet}).
 #' @param artistName a vector of artist names; can be one or more long.
-#' @param artistID a vector of unique artist IDs as returned by \code{artistSearch}; can be one or more long.
-#' @param returnClosest logical; should only the closest matching name be returned. Defaults to \code{TRUE}.
+#' @param artistID a vector of unique artist IDs as returned by \code{artistSearch}; can be 
+#' one or more long.
+#' @param returnClosest logical; should only the closest matching name be returned. Defaults 
+#' to \code{TRUE}.
 #' @param accessToken Spotify Web API token. Defaults to songwriteR::spotifyAccessTokenGet()
 #' @keywords artists
-#' @return \code{artistSearch} returns a \code{data.frame} with elements corresponding to the original search terms
-#' the matched names, and the associated unique IDs; \code{artistGet} returns a \code{data.frame} with elements x x x; 
+#' @return \code{artistSearch} returns a \code{data.frame} with elements corresponding to the 
+#' matched names, and the associated unique IDs; \code{artistGet} returns a \code{data.frame} 
+#' with elements x x x; 
 #' @examples
 #' \dontrun{
 #' artistSearch('johnny cash')
