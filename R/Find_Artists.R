@@ -15,33 +15,27 @@
 #' @export
 #' @rdname Find_Artists
 
-get_artists <- function(artist_name, return_closest_artist = FALSE, accessToken = get_spotify_access_token()) {
+artistSearch <- function(artistName, returnClosest = TRUE, 
+                         accessToken = spotifyAccessTokenGet()) {
+  ## search Spotify API for artist name
+  res <- httr::GET('https://api.spotify.com/v1/search', 
+                   query = list(q = artistName, type = 'artist', 
+                                access_token = accessToken))
+  res <- httr::content(res)
   
-  # Search Spotify API for artist name
-  res <- httr::GET('https://api.spotify.com/v1/search', query = list(q = artisName, type = 'artist', access_token = access_token)) %>%
-    content
-  
-  if (!is.null(res$error)) {
+  if(!is.null(res$error)) {
     stop(paste0(res$error$message, ' (', res$error$status, ')'))
   }
   
-  content <- res$artists %>% .$items
+  ## extract artist info
+  res <- res$artists$items
   
-  if (return_closest_artist == TRUE) {
-    num_loops <- 1
+  ## from info, extract only the name and ID
+  if(returnClosest) {
+    out <- do.call(data.frame, res[[1]][c('name', 'id')])
   } else {
-    num_loops <- length(content)
+    out <- as.data.frame(t(sapply(res, function(r) unlist(r[c('name', 'id')]))))
   }
   
-  # Clean response and combine all returned artists into a dataframe
-  artists <- map_df(seq_len(num_loops), function(this_row) {
-    this_artist <- content[[this_row]]
-    list(
-      artist_name = this_artist$name,
-      artist_uri = gsub('spotify:artist:', '', this_artist$uri), # remove meta info from the uri string
-      artist_img = ifelse(length(this_artist$images) > 0, this_artist$images[[1]]$url, NA) # we'll grab this just for fun
-    )
-  }) %>% dplyr::filter(!duplicated(tolower(artist_name)))
-  
-  return(artists)
+  return(out)
 }
