@@ -10,14 +10,17 @@
 #' spotifyAccessTokenGet()
 #' }
 
-spotifyAccessTokenGet <- function(clientID = Sys.getenv('SPOTIFY_CLIENT_ID'), clientSecret = Sys.getenv('SPOTIFY_CLIENT_SECRET')) {
+spotifyAccessTokenGet <- function(clientID = Sys.getenv('SPOTIFY_CLIENT_ID'), 
+                                  clientSecret = Sys.getenv('SPOTIFY_CLIENT_SECRET')) {
   post <- httr::POST('https://accounts.spotify.com/api/token',
                      httr::accept_json(), httr::authenticate(clientID, clientSecret),
                      body = list(grant_type = 'client_credentials'),
-                     encode = 'form', httr::config(http_version = 2)) %>% content
+                     encode = 'form', httr::config(http_version = 2))
+  post <- httr::content(post)
   
   if (!is.null(post$error)) {
-    stop(paste0('Could not authenticate with given Spotify credentials:\n\t', post$error_description))
+    stop(paste0('Could not authenticate with given Spotify credentials:\n\t', 
+                post$error_description))
   }
   
   return(post$access_token)
